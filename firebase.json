@@ -1,0 +1,6 @@
+{
+  "firestore": {
+    "database": "ai-studio-android-futureai-c9c79bbe-11da-44d8-82a6-c8ba330e6858",
+    "rules": "firestore.rules"
+  }
+}

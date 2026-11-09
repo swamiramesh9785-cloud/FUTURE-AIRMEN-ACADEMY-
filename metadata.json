@@ -1,0 +1,6 @@
+{
+  "name": "Future Airmen",
+  "description": "Premium defence examination platform for Indian Air Force, Navy, and Coast Guard aspirants with AI mock generator, live exam interface, and leaderboard.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

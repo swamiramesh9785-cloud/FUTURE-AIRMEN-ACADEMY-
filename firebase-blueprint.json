@@ -1,0 +1,99 @@
+{
+  "entities": {
+    "UserProfile": {
+      "title": "UserProfile",
+      "description": "User profile for students and admin on Future Airmen",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string" },
+        "name": { "type": "string" },
+        "email": { "type": "string" },
+        "photoUrl": { "type": "string" },
+        "role": { "type": "string", "enum": ["student", "admin"] },
+        "testsAttempted": { "type": "integer" },
+        "bestScore": { "type": "number" },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["userId", "name", "email", "role", "testsAttempted", "bestScore", "createdAt", "updatedAt"]
+    },
+    "MockExam": {
+      "title": "MockExam",
+      "description": "Defence examination mock test created by admin",
+      "type": "object",
+      "properties": {
+        "title": { "type": "string" },
+        "description": { "type": "string" },
+        "category": { "type": "string" },
+        "durationMinutes": { "type": "integer" },
+        "totalMarks": { "type": "number" },
+        "positiveMark": { "type": "number" },
+        "negativeMark": { "type": "number" },
+        "isPublished": { "type": "boolean" },
+        "questionCount": { "type": "integer" },
+        "questions": { "type": "array" },
+        "createdBy": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["title", "category", "durationMinutes", "totalMarks", "positiveMark", "negativeMark", "isPublished", "questionCount", "questions", "createdBy", "createdAt", "updatedAt"]
+    },
+    "ExamResult": {
+      "title": "ExamResult",
+      "description": "Result of an exam attempt submitted by a student",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string" },
+        "mockId": { "type": "string" },
+        "mockTitle": { "type": "string" },
+        "category": { "type": "string" },
+        "score": { "type": "number" },
+        "totalMarks": { "type": "number" },
+        "correctCount": { "type": "integer" },
+        "incorrectCount": { "type": "integer" },
+        "unattemptedCount": { "type": "integer" },
+        "accuracy": { "type": "number" },
+        "timeTakenSeconds": { "type": "integer" },
+        "answersJson": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["userId", "mockId", "mockTitle", "category", "score", "totalMarks", "correctCount", "incorrectCount", "unattemptedCount", "accuracy", "timeTakenSeconds", "createdAt"]
+    },
+    "LeaderboardEntry": {
+      "title": "LeaderboardEntry",
+      "description": "All-India public rank entry for a completed exam attempt",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string" },
+        "userName": { "type": "string" },
+        "userPhoto": { "type": "string" },
+        "mockId": { "type": "string" },
+        "mockTitle": { "type": "string" },
+        "category": { "type": "string" },
+        "score": { "type": "number" },
+        "totalMarks": { "type": "number" },
+        "timeTakenSeconds": { "type": "integer" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["userId", "userName", "mockId", "mockTitle", "category", "score", "totalMarks", "timeTakenSeconds", "createdAt"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": { "$ref": "#/entities/UserProfile" },
+      "description": "Student and admin profiles"
+    },
+    "/mocks/{mockId}": {
+      "schema": { "$ref": "#/entities/MockExam" },
+      "description": "Mock tests curated for defence examinations"
+    },
+    "/users/{userId}/results/{resultId}": {
+      "schema": { "$ref": "#/entities/ExamResult" },
+      "description": "User private exam submission records"
+    },
+    "/leaderboard/{attemptId}": {
+      "schema": { "$ref": "#/entities/LeaderboardEntry" },
+      "description": "Public leaderboard rankings for exams"
+    }
+  }
+}
